@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+  <div class="container">
+    <div class="row">
+   
+        <div class="col-6 mx-auto">
+          <div class="col-12">
+            <form action="" method="get" class="d-flex mt-2">
+              {% csrf_token %}
+              <input type="search" name="search" placeholder="Search Student"  class="form-control">
+              <input type="submit" value="Search" class="btn btn-danger">
+            </form>
+          </div>
+            <table class="table mt-5">
+                <tr>
+                  <td>ID</td>
+                  <td>NAme</td>
+                  <td>EMail</td>
+                  <td>Contact</td>
+                  <td>Action</td>
+                </tr>
+                
+                {% for std  in object_list %}
+               <tr>
+                  <td>{{std.id}}</td>
+                  <td>{{std.name}}</td>
+                  <td>{{std.email}}</td>
+                  <td>{{std.contact}}</td>
+                  <td>
+                      <a href="{% url 'delete' std.id %}" class="btn btn-danger">Delete</a>
+                      <a href="{% url 'edit' std.id %}" class="btn btn-info">Edit</a>
+                  </td>
+               </tr>
+                {% endfor %}
+          
+              </table>
+        </div>
+    </div>
+  </div>
+{% endblock%}
